@@ -41,6 +41,12 @@ public class ContactRestHandler {
     }
 
     //Find a Contact by email address.
+    public Mono<ServerResponse> getContactByEmail(ServerRequest request) {
+        String email = request.pathVariable("email");
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(contactService.getContactByEmail(email));
+    }
 
     //Save a new Contact
 

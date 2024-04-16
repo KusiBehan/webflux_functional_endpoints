@@ -20,9 +20,9 @@ public class ContactRestRouter {
                 .route(GET("/functional/contacts")
                         , contactRestHandler::getAllContacts)
                 .andRoute(GET("/functional/contacts/{id}")
-                        , contactRestHandler::getContactById);
-//                .andRoute(GET("/functional/contacts/byEmail/{email}")
-//                        , contactRestHandler::getByEmail)
+                        , contactRestHandler::getContactById)
+                .andRoute(GET("/functional/contacts/byEmail/{email}")
+                        , contactRestHandler::getContactByEmail);
 //                .andRoute(POST("/functional/contacts")
 //                        , contactRestHandler::insertContact)
 //                .andRoute(PUT("functional/contacts/{id}")

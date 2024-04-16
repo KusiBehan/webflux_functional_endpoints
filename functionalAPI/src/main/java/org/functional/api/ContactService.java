@@ -25,4 +25,11 @@ public class ContactService {
                 .findFirst();
          return contactOptional.orElse(null);
     }
+
+    public Contact getContactByEmail(String email){
+        Optional<Contact> contactOptional = contactList.stream()
+                .filter(contact -> contact.getEmail().equals(email))
+                .findFirst();
+        return contactOptional.orElse(null);
+    }
 }
