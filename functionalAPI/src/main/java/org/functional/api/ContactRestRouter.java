@@ -24,9 +24,9 @@ public class ContactRestRouter {
                 .andRoute(GET("/functional/contacts/byEmail/{email}")
                         , contactRestHandler::getContactByEmail)
                 .andRoute(POST("/functional/contacts")
-                        , contactRestHandler::insertContact);
-//                .andRoute(PUT("functional/contacts/{id}")
-//                        , contactRestHandler::updateContact)
+                        , contactRestHandler::insertContact)
+                .andRoute(PUT("functional/contacts/{id}")
+                        , contactRestHandler::updateContact);
 //                .andRoute(DELETE("/functional/contacts/{id}")
 //                        , contactRestHandler::deleteContact);
 //    }

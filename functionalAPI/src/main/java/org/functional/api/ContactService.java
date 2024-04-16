@@ -17,8 +17,6 @@ public class ContactService {
             ))
             );
 
-
-
     public List<Contact> getAllContacts(){
         return contactList;
     }
@@ -37,14 +35,27 @@ public class ContactService {
         return contactOptional.orElse(null);
     }
 
-    public Contact insertContact1(Contact contactToSave){
-        Optional<Contact> contactOptional = Stream.concat(contactList.stream(), Stream.of(contactToSave))
-                .findFirst();
-        return contactOptional.orElse(null);
-    }
 
+    //todo find a way to keep the data persistant and not violating the functional programmin paradigma
     public Contact insertContact(Contact contactToSave){
         contactList.add(contactToSave);
         return contactToSave;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
