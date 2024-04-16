@@ -12,13 +12,15 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 @Configuration
 public class ContactRestRouter {
 
+    //Developer help localhost:8080/functional/contacts
+
     @Bean
     public RouterFunction<ServerResponse> routeContact(ContactRestHandler contactRestHandler) {
         return RouterFunctions
-                .route(GET("/functional/contacts/")
-                        , contactRestHandler::getAllContacts);
-//                .andRoute(GET("/functional/contacts/{id}")
-//                        , contactRestHandler::getById)
+                .route(GET("/functional/contacts")
+                        , contactRestHandler::getAllContacts)
+                .andRoute(GET("/functional/contacts/{id}")
+                        , contactRestHandler::getContactById);
 //                .andRoute(GET("/functional/contacts/byEmail/{email}")
 //                        , contactRestHandler::getByEmail)
 //                .andRoute(POST("/functional/contacts")

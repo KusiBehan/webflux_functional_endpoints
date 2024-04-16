@@ -26,6 +26,12 @@ public class ContactRestHandler {
     ContactService contactService = new ContactService();
 
     //GET - find a contact by id
+    public Mono<ServerResponse> getContactById(ServerRequest request){
+        String id = request.pathVariable("id");
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(contactService.getContactById(id));
+    }
 
     //List all contacts
     public Mono<ServerResponse> getAllContacts(ServerRequest request) {
