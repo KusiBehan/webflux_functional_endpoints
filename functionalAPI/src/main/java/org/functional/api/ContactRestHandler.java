@@ -1,5 +1,6 @@
 package org.functional.api;
 
+import com.mongodb.internal.connection.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -47,6 +48,15 @@ public class ContactRestHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(contactService.getContactByEmail(email));
     }
+
+    public Mono<ServerResponse> insertContact(ServerRequest request) {
+        Mono<Contact> unsavedContact = request.bodyToMono(Contact.class);
+    return  unsavedContact.flatMap(contact -> Mono.just(contactService.insertContact(contact))
+                .flatMap(savedContact -> ServerResponse.accepted()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .bodyValue(contact)));
+    }
+
 
     //Save a new Contact
 

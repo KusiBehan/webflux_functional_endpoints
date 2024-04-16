@@ -1,18 +1,22 @@
 package org.functional.api;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class ContactService {
 
-    private final List<Contact> contactList = (
-            Arrays.asList(
+    private List<Contact> contactList = (
+
+            new ArrayList<>( Arrays.asList(
                     new Contact("1","Behan", "fake@gmail.com", "1243"),
                     new Contact("2","Behan", "fake@gmail.com", "1243"),
                     new Contact("3","Behan", "fake@gmail.com", "1243")
-            )
+            ))
             );
+
 
 
     public List<Contact> getAllContacts(){
@@ -31,5 +35,16 @@ public class ContactService {
                 .filter(contact -> contact.getEmail().equals(email))
                 .findFirst();
         return contactOptional.orElse(null);
+    }
+
+    public Contact insertContact1(Contact contactToSave){
+        Optional<Contact> contactOptional = Stream.concat(contactList.stream(), Stream.of(contactToSave))
+                .findFirst();
+        return contactOptional.orElse(null);
+    }
+
+    public Contact insertContact(Contact contactToSave){
+        contactList.add(contactToSave);
+        return contactToSave;
     }
 }
