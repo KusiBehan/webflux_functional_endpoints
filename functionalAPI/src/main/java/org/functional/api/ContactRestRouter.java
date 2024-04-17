@@ -26,9 +26,9 @@ public class ContactRestRouter {
                 .andRoute(POST("/functional/contacts")
                         , contactRestHandler::insertContact)
                 .andRoute(PUT("functional/contacts/{id}")
-                        , contactRestHandler::updateContact);
-//                .andRoute(DELETE("/functional/contacts/{id}")
-//                        , contactRestHandler::deleteContact);
-//    }
+                        , contactRestHandler::updateContact)
+                .andRoute(DELETE("/functional/contacts/{id}")
+                        , contactRestHandler::deleteContact);
     }
-}
+
+    }

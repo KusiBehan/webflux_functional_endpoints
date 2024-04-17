@@ -1,28 +1,15 @@
 package org.functional.api;
 
-import com.mongodb.internal.connection.Server;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import java.util.List;
-
-import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
 @Component
 public class ContactRestHandler {
 
-
-    private Mono<ServerResponse> response404
-            = ServerResponse.notFound().build();
-
-    private Mono<ServerResponse> response406
-            = ServerResponse.status(HttpStatus.NOT_ACCEPTABLE).build();
 
     ContactService contactService = new ContactService();
 
@@ -79,6 +66,11 @@ public class ContactRestHandler {
              ServerResponse.accepted()
                     .bodyValue(contact1));
     }
-    //todo Delete a Contact
-    //Delete a Contact
+
+    public Mono<ServerResponse> deleteContact(ServerRequest request){
+        String id = request.pathVariable("id");
+        Contact deletedContact = contactService.deleteContactbyId(id);
+        return ServerResponse.ok()
+                .bodyValue(deletedContact);
+    }
 }

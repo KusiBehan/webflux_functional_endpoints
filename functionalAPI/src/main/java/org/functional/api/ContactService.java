@@ -36,9 +36,16 @@ public class ContactService {
     }
 
 
-    //todo find a way to keep the data persistant and not violating the functional programmin paradigma
+    //todo find a way to keep the data persistant and not violating the functional programming paradigma
     public Contact insertContact(Contact contactToSave){
         contactList.add(contactToSave);
         return contactToSave;
+    }
+
+
+    public Contact deleteContactbyId(String id){
+        Contact contactToRemove = getContactById(id);
+        contactList.remove(contactToRemove);
+        return contactToRemove;
     }
 }
