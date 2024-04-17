@@ -1,7 +1,4 @@
-package org.functional.api;
-
-import java.util.Objects;
-import java.util.StringJoiner;
+package org.functional.api.model;
 
 public class Contact {
     private String id;
@@ -10,7 +7,7 @@ public class Contact {
     private String phone;
 
     public Contact(){
-// For deserialization purposes
+        // For deserialization purposes
     }
 
     public Contact(String id ,String name, String email, String phone){
@@ -56,20 +53,5 @@ public class Contact {
     public Contact setPhone(String phone) {
         this.phone = phone;
         return this;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", Contact.class.getSimpleName() + "[", "]")
-                .add("id='" + id + "'")
-                .add("name='" + name + "'")
-                .add("email='" + email + "'")
-                .add("phone=" + phone)
-                .toString();
     }
 }

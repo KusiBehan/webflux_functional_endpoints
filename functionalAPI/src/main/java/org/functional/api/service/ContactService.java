@@ -1,14 +1,15 @@
-package org.functional.api;
+package org.functional.api.service;
+
+import org.functional.api.model.Contact;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class ContactService {
 
-    private List<Contact> contactList = (
+    private final List<Contact> contactList = (
 
             new ArrayList<>( Arrays.asList(
                     new Contact("1","Behan", "fake@gmail.com", "1243"),
@@ -40,6 +41,12 @@ public class ContactService {
     public Contact insertContact(Contact contactToSave){
         contactList.add(contactToSave);
         return contactToSave;
+    }
+
+    public Contact updateContact(Contact updatedContact){
+        int index = contactList.indexOf(getContactById(updatedContact.getId()));
+        contactList.set(index, updatedContact);
+        return updatedContact;
     }
 
 

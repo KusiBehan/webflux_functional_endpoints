@@ -1,4 +1,4 @@
-package org.functional.api;
+package org.functional.api.reactive;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,8 +11,6 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 
 @Configuration
 public class ContactRestRouter {
-
-    //Developer help localhost:8080/functional/contacts
 
     @Bean
     public RouterFunction<ServerResponse> routeContact(ContactRestHandler contactRestHandler) {

@@ -1,6 +1,7 @@
-package org.functional.api;
+package org.functional.api.reactive;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.functional.api.model.Contact;
+import org.functional.api.service.ContactService;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -46,21 +47,18 @@ public class ContactRestHandler {
     }
 
     //Update an existing contact
-
-    //Reminder it only functions when the whole body is given single field not editable
-    //todo implement single field editing
-
+    //Body of the Request should be a valid Json representation of the Class Contact
     public Mono<ServerResponse> updateContact(ServerRequest request) {
         Mono<Contact> contact = request.bodyToMono(Contact.class);
         String id = request.pathVariable("id");
         Mono<Contact> updatedContact = contact.flatMap(contact1 -> Mono.just(contactService.getContactById(id))
                 .flatMap(oldContact -> {
                     oldContact
-                            .setId(contact1.getId())
+                            .setId(id) // not interchangeable
                             .setName(contact1.getName())
                             .setEmail(contact1.getEmail())
                             .setPhone(contact1.getPhone());
-                    return Mono.just(contactService.insertContact(oldContact));
+                    return Mono.just(contactService.updateContact(oldContact)); // update Contact
                 }));
         return updatedContact.flatMap(contact1 ->
              ServerResponse.accepted()
